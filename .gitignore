@@ -1,2 +1,42 @@
-test-output/
+# -------------------------
+# Maven Build Artifacts
+# -------------------------
 target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+
+# -------------------------
+# TestNG Reports
+# -------------------------
+test-output/
+
+# -------------------------
+# Eclipse Specific
+# -------------------------
+.project
+.classpath
+.settings/
+bin/
+
+# -------------------------
+# IntelliJ IDEA Specific (if you ever use it)
+# -------------------------
+.idea/
+*.iml
+out/
+
+# -------------------------
+# Logs & Temp Files
+# -------------------------
+*.log
+*.tmp
+*.swp
+
+# -------------------------
+# OS-specific files
+# -------------------------
+.DS_Store      # macOS
+Thumbs.db      # Windows
