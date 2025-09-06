@@ -1,6 +1,7 @@
 package com.nopcommerce.tests;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -8,58 +9,87 @@ import org.testng.annotations.Test;
 public class StandAlone extends BaseTest{
 		
 	@Test
-	public void checkRegisterButton() {
+	public void validateRegisterButtonFunctionality() {
 		initializeDriver();
-		driver.findElement(By.cssSelector("a.ico-register")).click();
+		navigateToRegister();
 		assertTitle("nopCommerce demo store. Register");
 		assertPageTitle("Register");
-		checkLogo();
+		validateLogoFunctionality();
 		teardown();
 	}
 	
 	@Test
-	public void checkLoginButton() {
+	public void validateLoginButtonFunctionality() {
 		initializeDriver();
-		driver.findElement(By.cssSelector("a.ico-login")).click();
+		navigateToLogin();
 		assertTitle("nopCommerce demo store. Login");
 		assertPageTitle("Welcome, Please Sign In!");
-		checkLogo();
+		validateLogoFunctionality();
 		teardown();
 	}
 	
-	@Test
-	public void checkEmptyWishList() {
+	@Test (description = "When wishlist is empty")
+	public void validateWishListButtonFunctionality() {
 		initializeDriver();
-		driver.findElement(By.cssSelector("a.ico-wishlist")).click();
+		navigateToWishlist();
 		assertTitle("nopCommerce demo store. Wishlist");
 		assertPageTitle("Wishlist");
 		assertEmptyTexts("The wishlist is empty!");
-		checkLogo();
+		validateLogoFunctionality();
+		teardown();
+	}
+	
+	@Test (description = "When cart is empty")
+	public void validateCartButtonFunctionality() {
+		initializeDriver();
+		navigateToCart();
+		assertTitle("nopCommerce demo store. Shopping Cart");
+		assertPageTitle("Shopping cart");
+		assertEmptyTexts("Your Shopping Cart is empty!");
+		validateLogoFunctionality();
 		teardown();
 	}
 	
 	@Test
-	public void checkEmptyCart() {
+	public void validateCurrencyDropdown() {
 		initializeDriver();
-		driver.findElement(By.cssSelector("a.ico-cart")).click();
-		assertTitle("nopCommerce demo store. Shopping Cart");
-		assertPageTitle("Shopping cart");
-		assertEmptyTexts("Your Shopping Cart is empty!");
-		checkLogo();
-		teardown();
-	}
-	
-	public void checkCurrencyDropdown() {
-		initializeDriver();
+		String expectedValue = "Euro";
+		changeCustomerCurrency(expectedValue);
+		String actualValue =  new Select(driver.findElement(By.id("customerCurrency"))).getFirstSelectedOption().getText();
+		Assert.assertEquals(actualValue, expectedValue);
 		teardown();
 		
 	}
 	
-	public void checkLogo() {
-		//check icon
+	
+	public void changeCustomerCurrency(String currency) {
+		Select select = new Select(driver.findElement(By.id("customerCurrency")));
+		select.selectByVisibleText(currency);
+	}
+	
+	public void navigateToHome() {
 		driver.findElement(By.cssSelector("div[class='header-logo'] img")).click();
-		String homeTitle = driver.getTitle();
-		Assert.assertEquals(homeTitle, "nopCommerce demo store. Home page title");
+	}
+	
+	public void navigateToRegister() {
+		driver.findElement(By.cssSelector("a.ico-register")).click();
+	}
+	
+	public void navigateToLogin() {
+		driver.findElement(By.cssSelector("a.ico-login")).click();
+	}
+	
+	public void navigateToWishlist() {
+		driver.findElement(By.cssSelector("a.ico-wishlist")).click();
+	}
+	
+	public void navigateToCart() {
+		driver.findElement(By.cssSelector("a.ico-cart")).click();
+	}
+	
+	public void validateLogoFunctionality() {
+		navigateToHome();
+		assertTitle("nopCommerce demo store. Home page title");
 	}
 	
 	public void assertTitle(String expectedTitle) {
