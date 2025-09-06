@@ -16,7 +16,7 @@ import org.testng.annotations.Test;
 
 public class StandAlone extends BaseTest{
 		
-	//@Test
+	@Test
 	public void validateRegisterButtonFunctionality() {
 		initializeDriver();
 		navigateToRegister();
@@ -26,7 +26,7 @@ public class StandAlone extends BaseTest{
 		teardown();
 	}
 	
-	//@Test
+	@Test
 	public void validateLoginButtonFunctionality() {
 		initializeDriver();
 		navigateToLogin();
@@ -36,7 +36,7 @@ public class StandAlone extends BaseTest{
 		teardown();
 	}
 	
-	//@Test (description = "When wishlist is empty")
+	@Test (description = "When wishlist is empty")
 	public void validateWishListButtonFunctionality() {
 		initializeDriver();
 		navigateToWishlist();
@@ -47,7 +47,7 @@ public class StandAlone extends BaseTest{
 		teardown();
 	}
 	
-	//@Test (description = "When cart is empty")
+	@Test (description = "When cart is empty")
 	public void validateCartButtonFunctionality() {
 		initializeDriver();
 		navigateToCart();
@@ -58,7 +58,7 @@ public class StandAlone extends BaseTest{
 		teardown();
 	}
 	
-	//@Test
+	@Test
 	public void validateCurrencyDropdown() {
 		initializeDriver();
 		String expectedValue = "Euro";
@@ -67,7 +67,6 @@ public class StandAlone extends BaseTest{
 		Assert.assertEquals(actualValue, expectedValue);
 		teardown();	
 	}
-	
 	
 	@Test
 	public void validateSearchBoxFunctionality() {
@@ -92,8 +91,8 @@ public class StandAlone extends BaseTest{
 		}
 		
 		Assert.assertEquals(actuaList, expectedList);
+		teardown();
 	}
-	
 	
 	
 	public void changeCustomerCurrency(String currency) {
