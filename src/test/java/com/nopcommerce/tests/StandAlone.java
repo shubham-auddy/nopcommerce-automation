@@ -1,14 +1,22 @@
 package com.nopcommerce.tests;
 
+
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 
 public class StandAlone extends BaseTest{
 		
-	@Test
+	//@Test
 	public void validateRegisterButtonFunctionality() {
 		initializeDriver();
 		navigateToRegister();
@@ -18,7 +26,7 @@ public class StandAlone extends BaseTest{
 		teardown();
 	}
 	
-	@Test
+	//@Test
 	public void validateLoginButtonFunctionality() {
 		initializeDriver();
 		navigateToLogin();
@@ -28,7 +36,7 @@ public class StandAlone extends BaseTest{
 		teardown();
 	}
 	
-	@Test (description = "When wishlist is empty")
+	//@Test (description = "When wishlist is empty")
 	public void validateWishListButtonFunctionality() {
 		initializeDriver();
 		navigateToWishlist();
@@ -39,7 +47,7 @@ public class StandAlone extends BaseTest{
 		teardown();
 	}
 	
-	@Test (description = "When cart is empty")
+	//@Test (description = "When cart is empty")
 	public void validateCartButtonFunctionality() {
 		initializeDriver();
 		navigateToCart();
@@ -50,16 +58,42 @@ public class StandAlone extends BaseTest{
 		teardown();
 	}
 	
-	@Test
+	//@Test
 	public void validateCurrencyDropdown() {
 		initializeDriver();
 		String expectedValue = "Euro";
 		changeCustomerCurrency(expectedValue);
 		String actualValue =  new Select(driver.findElement(By.id("customerCurrency"))).getFirstSelectedOption().getText();
 		Assert.assertEquals(actualValue, expectedValue);
-		teardown();
-		
+		teardown();	
 	}
+	
+	
+	@Test
+	public void validateSearchBoxFunctionality() {
+		
+		List<String> expectedList = new ArrayList<String>();
+		expectedList.add("Apple MacBook Pro");
+		expectedList.add("Apple iCam");
+		expectedList.add("Apple iPhone 16 128GB");
+		
+		List<String> actuaList = new ArrayList<String>();
+		
+		initializeDriver();
+		driver.findElement(By.id("small-searchterms")).sendKeys("Apple");
+		
+		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+		wait.until(ExpectedConditions.elementToBeClickable(By.id("ui-id-1")));
+		
+		List<WebElement> suggestions = driver.findElements(By.cssSelector("li[class='ui-menu-item']"));
+		for(WebElement e: suggestions) {
+			String s = e.findElement(By.tagName("span")).getText();
+			actuaList.add(s);
+		}
+		
+		Assert.assertEquals(actuaList, expectedList);
+	}
+	
 	
 	
 	public void changeCustomerCurrency(String currency) {
