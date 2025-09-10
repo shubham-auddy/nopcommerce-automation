@@ -1,6 +1,9 @@
 package com.nopcommerce.tests;
 
 import com.nopcommerce.pages.HomePageComponents;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -18,7 +21,7 @@ public class HomePageTests extends BaseTest{
     public void T041_verifyWTOSDescription()
     {
         homePage = new HomePageComponents(driver);
-        Assert.assertTrue(homePage.WTOSDescriptionisDisplayed(),"Description is not displayed");
+        Assert.assertTrue(homePage.WTOSDescriptionIsDisplayed(),"Description is not displayed");
     }
 
     @Test
@@ -127,4 +130,180 @@ public class HomePageTests extends BaseTest{
         Assert.assertEquals(homePage.clickDigitalDownloadsImage(), "nopCommerce demo store. Digital downloads");
     }
 
+    @Test
+    public void T012_verifyBYOCText()
+    {
+        homePage = new HomePageComponents(driver);
+        Assert.assertEquals(homePage.BYOCTextIsVisible(), "Build your own computer");
+    }
+
+    @Test
+    public void T013_verifyBYOCLink()
+    {
+        homePage = new HomePageComponents(driver);
+        Assert.assertEquals(homePage.clickBYOC(), "nopCommerce demo store. Build your own computer");
+    }
+
+    @Test
+    public void T014_verifyBYOCAddToCart()
+    {
+        homePage = new HomePageComponents(driver);
+        homePage.clickBYOCAddToCart();
+        WebElement email = driver.findElement(By.cssSelector(".email-a-friend-button"));
+        Assert.assertTrue(email.isDisplayed());
+    }
+
+    @Test
+    public void T015_verifyBYOCAddToCompare()
+    {
+        homePage = new HomePageComponents(driver);
+        homePage.clickBYOCAddToCompareBtn();
+        WebElement popUp = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".bar-notification")));
+        Assert.assertTrue(popUp.getText().contains("product comparison"));
+        wait.until(ExpectedConditions.invisibilityOf(popUp));
+    }
+
+    @Test
+    public void T016_verifyBYOCAddToWishlist()
+    {
+        homePage = new HomePageComponents(driver);
+        homePage.clickBYOCAddToWishList();
+        WebElement email = driver.findElement(By.cssSelector(".email-a-friend-button"));
+        Assert.assertTrue(email.isDisplayed());
+    }
+
+    @Test
+    public void T017_verifyMacbookText()
+    {
+        homePage = new HomePageComponents(driver);
+        Assert.assertEquals(homePage.MacbookTextIsVisible(), "Apple MacBook Pro");
+    }
+
+    @Test
+    public void T018_verifyMacbookLink()
+    {
+        homePage = new HomePageComponents(driver);
+        Assert.assertEquals(homePage.clickMacbook(), "nopCommerce demo store. Apple MacBook Pro");
+    }
+
+    @Test
+    public void T019_verifyMacbookAddToCart()
+    {
+        homePage = new HomePageComponents(driver);
+        homePage.clickMacbookAddToCart();
+        WebElement email = driver.findElement(By.cssSelector(".email-a-friend-button"));
+        Assert.assertTrue(email.isDisplayed());
+    }
+
+    @Test
+    public void T020_verifyMacbookAddToCompare()
+    {
+        homePage = new HomePageComponents(driver);
+        homePage.clickMacbookAddToCompareBtn();
+        WebElement popUp = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".bar-notification")));
+        Assert.assertTrue(popUp.getText().contains("product comparison"));
+        wait.until(ExpectedConditions.invisibilityOf(popUp));
+    }
+
+    @Test
+    public void T021_verifyMacbookAddToWishlist()
+    {
+        homePage = new HomePageComponents(driver);
+        homePage.clickMacbookAddToWishList();
+        WebElement email = driver.findElement(By.cssSelector(".email-a-friend-button"));
+        Assert.assertTrue(email.isDisplayed());
+    }
+
+    @Test
+    public void T022_verifyHTCPhoneText()
+    {
+        homePage = new HomePageComponents(driver);
+        Assert.assertEquals(homePage.HTCPhoneTextIsVisible(), "HTC smartphone");
+    }
+
+    @Test
+    public void T023_verifyHTCPhoneLink()
+    {
+        homePage = new HomePageComponents(driver);
+        Assert.assertEquals(homePage.clickHTCPhone(), "nopCommerce demo store. HTC smartphone");
+    }
+
+    @Test
+    public void T024_verifyHTCPhoneAddToCart()
+    {
+        homePage = new HomePageComponents(driver);
+        int beforeCount = homePage.cartCount();
+        homePage.clickHTCPhoneAddToCart();
+        WebElement popUp = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".bar-notification")));
+        Assert.assertTrue(popUp.getText().contains("shopping cart"));
+        wait.until(ExpectedConditions.invisibilityOf(popUp));
+        int afterCount = homePage.cartCount();
+        Assert.assertEquals(afterCount, beforeCount+1, "count did not increase");
+
+    }
+
+    @Test
+    public void T025_verifyHTCAddToCompare()
+    {
+        homePage = new HomePageComponents(driver);
+        homePage.clickHTCPhoneAddToCompareBtn();
+        WebElement popUp = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".bar-notification")));
+        Assert.assertTrue(popUp.getText().contains("product comparison"));
+        wait.until(ExpectedConditions.invisibilityOf(popUp));
+    }
+
+    @Test
+    public void T026_verifyHTCAddToWishlist()
+    {
+        homePage = new HomePageComponents(driver);
+        int beforeCount = homePage.wishlistCount();
+        homePage.clickHTCPhoneAddToWishList();
+        WebElement popUp = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".bar-notification")));
+        Assert.assertTrue(popUp.getText().contains("wishlist"));
+        wait.until(ExpectedConditions.invisibilityOf(popUp));
+        int afterCount = homePage.wishlistCount();
+        Assert.assertEquals(afterCount, beforeCount+1, "count did not increase");
+    }
+
+    @Test
+    public void T027_verifyGiftCardText()
+    {
+        homePage = new HomePageComponents(driver);
+        Assert.assertEquals(homePage.giftCardTextIsVisible(), "$25 Virtual Gift Card");
+    }
+
+    @Test
+    public void T028_verifyGiftCardLink()
+    {
+        homePage = new HomePageComponents(driver);
+        Assert.assertEquals(homePage.clickGiftCard(), "nopCommerce demo store. $25 Virtual Gift Card");
+    }
+
+    @Test
+    public void T029_verifyGiftCardAddToCart()
+    {
+        homePage = new HomePageComponents(driver);
+        homePage.clickGiftCardAddToCart();
+        WebElement email = driver.findElement(By.cssSelector(".email-a-friend-button"));
+        Assert.assertTrue(email.isDisplayed());
+    }
+
+    @Test
+    public void T030_verifyGiftCardAddToCompare()
+    {
+        homePage = new HomePageComponents(driver);
+        homePage.clickGiftCardAddToCompareBtn();
+        WebElement popUp = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".bar-notification")));
+        Assert.assertTrue(popUp.getText().contains("product comparison"));
+        wait.until(ExpectedConditions.invisibilityOf(popUp));
+    }
+
+    @Test
+    public void T031_verifyGiftCardAddToWishlist()
+    {
+        homePage = new HomePageComponents(driver);
+        homePage.clickGiftCardAddToWishList();
+        WebElement email = driver.findElement(By.cssSelector(".email-a-friend-button"));
+        Assert.assertTrue(email.isDisplayed());
+    }
 }

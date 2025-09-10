@@ -20,17 +20,22 @@ public class HomePageComponents {
     By digitalDownloadsTextWTOS = By.cssSelector("h2.title a[href='/digital-downloads']");
     By digitalDownloadsImage = By.cssSelector("div.picture a[href='/digital-downloads']");
 
-    By BYOCText = By.xpath("//a[text()='Build your own computer']/ancestor::div[contains(@class,'product-item')]");
+    By BYOC = By.cssSelector("div[data-productid='1']");
+    By Macbook = By.cssSelector("div[data-productid='4']");
+    By HTCPhone = By.cssSelector("div[data-productid='18']");
+    By giftCard = By.cssSelector("div[data-productid='45']");
+    //headerText locator is similar for all the products
+    By productText = By.cssSelector(".product-title");
     //addToCart locator is similar for all the products
-    By addToCartBtn = By.xpath(".//button[text()='Add to cart']");
+    By addToCartBtn = By.cssSelector(".product-box-add-to-cart-button");
     //addToCompareList locator is similar for all the products
-    By addToCompareBtn = By.xpath(".//button[text()='Add to compare list']");
+    By addToCompareBtn = By.cssSelector(".add-to-compare-list-button");
     //addToWishList locator is similar for all the products
-    By addToWishlistBtn = By.xpath(".//button[text()='Add to wishlist']");
-    By MacbookText = By.xpath("//a[text()='Apple MacBook Pro']/ancestor::div[contains(@class,'product-item')]");
-    By HTCPhone = By.xpath("//a[text()='HTC smartphone']/ancestor::div[contains(@class,'product-item')]");
-    By giftCard = By.xpath("//a[contains(.,'Virtual Gift Card')]/ancestor::div[contains(@class,'product-item')]");
-    By homeBtn = By.xpath("//span[text()='Home']");
+    By addToWishlistBtn = By.cssSelector(".add-to-wishlist-button");
+    By cartQty = By.cssSelector(".cart-qty");
+    By wishlistQty = By.cssSelector(".wishlist-qty");
+
+
 
     public HomePageComponents(WebDriver driver)
     {
@@ -42,7 +47,7 @@ public class HomePageComponents {
         return driver.findElement(welcomeToOurStore).getText();
     }
 
-    public boolean WTOSDescriptionisDisplayed()
+    public boolean WTOSDescriptionIsDisplayed()
     {
         return driver.findElement(welcomeToOurStoreDescription).isDisplayed();
     }
@@ -131,9 +136,120 @@ public class HomePageComponents {
         return driver.getTitle();
     }
 
+    public String BYOCTextIsVisible()
+    {
+        return driver.findElement(BYOC).findElement(productText).getText();
+    }
 
+    public @Nullable String clickBYOC()
+    {
+        driver.findElement(BYOC).findElement(productText).click();
+        return driver.getTitle();
+    }
 
+    public void clickBYOCAddToCart()
+    {
+        driver.findElement(BYOC).findElement(addToCartBtn).click();
+    }
 
+    public void clickBYOCAddToCompareBtn()
+    {
+        driver.findElement(BYOC).findElement(addToCompareBtn).click();
+    }
 
+    public void clickBYOCAddToWishList()
+    {
+        driver.findElement(BYOC).findElement(addToWishlistBtn).click();
+    }
+
+    public String MacbookTextIsVisible()
+    {
+        return driver.findElement(Macbook).findElement(productText).getText();
+    }
+
+    public @Nullable String clickMacbook()
+    {
+        driver.findElement(Macbook).findElement(productText).click();
+        return driver.getTitle();
+    }
+
+    public void clickMacbookAddToCart()
+    {
+        driver.findElement(Macbook).findElement(addToCartBtn).click();
+    }
+
+    public void clickMacbookAddToCompareBtn()
+    {
+        driver.findElement(Macbook).findElement(addToCompareBtn).click();
+    }
+
+    public void clickMacbookAddToWishList()
+    {
+        driver.findElement(Macbook).findElement(addToWishlistBtn).click();
+    }
+
+    public String HTCPhoneTextIsVisible()
+    {
+        return driver.findElement(HTCPhone).findElement(productText).getText();
+    }
+
+    public @Nullable String clickHTCPhone()
+    {
+        driver.findElement(HTCPhone).findElement(productText).click();
+        return driver.getTitle();
+    }
+
+    public void clickHTCPhoneAddToCart()
+    {
+        driver.findElement(HTCPhone).findElement(addToCartBtn).click();
+    }
+
+    public int cartCount()
+    {
+        String cartText = driver.findElement(cartQty).getText();
+        return Integer.parseInt(cartText.replace("(","").replace(")","").trim());
+    }
+
+    public void clickHTCPhoneAddToCompareBtn()
+    {
+        driver.findElement(HTCPhone).findElement(addToCompareBtn).click();
+    }
+
+    public void clickHTCPhoneAddToWishList()
+    {
+        driver.findElement(HTCPhone).findElement(addToWishlistBtn).click();
+    }
+
+    public int wishlistCount()
+    {
+        String wishlistText = driver.findElement(wishlistQty).getText();
+        return Integer.parseInt(wishlistText.replace("(","").replace(")","").trim());
+    }
+
+    public String giftCardTextIsVisible()
+    {
+        return driver.findElement(giftCard).findElement(productText).getText();
+    }
+
+    public @Nullable String clickGiftCard()
+    {
+        driver.findElement(giftCard).findElement(productText).click();
+        return driver.getTitle();
+    }
+
+    public void clickGiftCardAddToCart()
+    {
+        driver.findElement(giftCard).findElement(addToCartBtn).click();
+    }
+
+    public void clickGiftCardAddToCompareBtn()
+    {
+        driver.findElement(giftCard).findElement(addToCompareBtn).click();
+    }
+
+    public void clickGiftCardAddToWishList()
+    {
+        driver.findElement(giftCard).findElement(addToWishlistBtn).click();
+    }
 
 }
