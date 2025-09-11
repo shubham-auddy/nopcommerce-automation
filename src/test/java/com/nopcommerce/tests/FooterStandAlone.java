@@ -4,7 +4,10 @@ import java.util.List;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import com.nopcommerce.utils.BrokenLinkUtil;
 
 public class FooterStandAlone extends BaseTest{
 	
@@ -34,9 +37,10 @@ public class FooterStandAlone extends BaseTest{
 	
 	@Test
 	public void verifyMyAccountSectionLinks() {
-		List<WebElement> myAccountLinks = driver.findElements(By.cssSelector("div[class='footer-block information'] li"));
+		List<WebElement> myAccountLinks = driver.findElements(By.cssSelector("div[class='footer-block information'] li a"));
 		for(WebElement e: myAccountLinks) {
-			System.out.println(e.getText());
+			Assert.assertTrue(BrokenLinkUtil.isLinkBroken(e), "Broken URL - " + e.getAttribute("href"));
 		}
 	}
+	
 }
