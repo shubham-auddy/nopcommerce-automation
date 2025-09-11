@@ -15,4 +15,28 @@ public class FooterStandAlone extends BaseTest{
 			System.out.println(section.getText());
 		}
 	}
+	
+	@Test
+	public void verifyInformationSectionLinks() {
+		List<WebElement> informationLinks = driver.findElements(By.cssSelector("div[class='footer-block information'] li"));
+		for(WebElement e: informationLinks) {
+			System.out.println(e.getText());
+		}
+	}
+	
+	@Test
+	public void verifyCustomerServiceSectionLinks() {
+		List<WebElement> customerServiceLinks = driver.findElements(By.cssSelector("div[class='footer-block information'] li"));
+		for(WebElement e: customerServiceLinks) {
+			System.out.println(e.getText());
+		}
+	}
+	
+	@Test
+	public void verifyMyAccountSectionLinks() {
+		List<WebElement> myAccountLinks = driver.findElements(By.cssSelector("div[class='footer-block information'] li"));
+		for(WebElement e: myAccountLinks) {
+			System.out.println(e.getText());
+		}
+	}
 }
