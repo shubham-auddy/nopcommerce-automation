@@ -1,11 +1,14 @@
 package com.nopcommerce.tests;
 
 import com.nopcommerce.pages.HomePageComponents;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 public class HomePageTests extends BaseTest{
     HomePageComponents homePage;
@@ -131,30 +134,30 @@ public class HomePageTests extends BaseTest{
     }
 
     @Test
-    public void T012_verifyBYOCText()
+    public void T022_verifyBYOCText()
     {
         homePage = new HomePageComponents(driver);
         Assert.assertEquals(homePage.BYOCTextIsVisible(), "Build your own computer");
     }
 
     @Test
-    public void T013_verifyBYOCLink()
+    public void T023_verifyBYOCLink()
     {
         homePage = new HomePageComponents(driver);
         Assert.assertEquals(homePage.clickBYOC(), "nopCommerce demo store. Build your own computer");
     }
 
     @Test
-    public void T014_verifyBYOCAddToCart()
+    public void T024_verifyBYOCAddToCart()
     {
         homePage = new HomePageComponents(driver);
         homePage.clickBYOCAddToCart();
-        WebElement email = driver.findElement(By.cssSelector(".email-a-friend-button"));
-        Assert.assertTrue(email.isDisplayed());
+        WebElement header = driver.findElement(By.cssSelector("h1"));
+        Assert.assertEquals(header.getText(), "Build your own computer");
     }
 
     @Test
-    public void T015_verifyBYOCAddToCompare()
+    public void T025_verifyBYOCAddToCompare()
     {
         homePage = new HomePageComponents(driver);
         homePage.clickBYOCAddToCompareBtn();
@@ -164,12 +167,12 @@ public class HomePageTests extends BaseTest{
     }
 
     @Test
-    public void T016_verifyBYOCAddToWishlist()
+    public void T026_verifyBYOCAddToWishlist()
     {
         homePage = new HomePageComponents(driver);
         homePage.clickBYOCAddToWishList();
-        WebElement email = driver.findElement(By.cssSelector(".email-a-friend-button"));
-        Assert.assertTrue(email.isDisplayed());
+        WebElement header = driver.findElement(By.cssSelector("h1"));
+        Assert.assertEquals(header.getText(), "Build your own computer");
     }
 
     @Test
@@ -191,8 +194,8 @@ public class HomePageTests extends BaseTest{
     {
         homePage = new HomePageComponents(driver);
         homePage.clickMacbookAddToCart();
-        WebElement email = driver.findElement(By.cssSelector(".email-a-friend-button"));
-        Assert.assertTrue(email.isDisplayed());
+        WebElement header = driver.findElement(By.cssSelector("h1"));
+        Assert.assertEquals(header.getText(), "Apple MacBook Pro");
     }
 
     @Test
@@ -210,26 +213,26 @@ public class HomePageTests extends BaseTest{
     {
         homePage = new HomePageComponents(driver);
         homePage.clickMacbookAddToWishList();
-        WebElement email = driver.findElement(By.cssSelector(".email-a-friend-button"));
-        Assert.assertTrue(email.isDisplayed());
+        WebElement header = driver.findElement(By.cssSelector("h1"));
+        Assert.assertEquals(header.getText(), "Apple MacBook Pro");
     }
 
     @Test
-    public void T022_verifyHTCPhoneText()
+    public void T012_verifyHTCPhoneText()
     {
         homePage = new HomePageComponents(driver);
         Assert.assertEquals(homePage.HTCPhoneTextIsVisible(), "HTC smartphone");
     }
 
     @Test
-    public void T023_verifyHTCPhoneLink()
+    public void T013_verifyHTCPhoneLink()
     {
         homePage = new HomePageComponents(driver);
         Assert.assertEquals(homePage.clickHTCPhone(), "nopCommerce demo store. HTC smartphone");
     }
 
     @Test
-    public void T024_verifyHTCPhoneAddToCart()
+    public void T014_verifyHTCPhoneAddToCart()
     {
         homePage = new HomePageComponents(driver);
         int beforeCount = homePage.cartCount();
@@ -243,7 +246,7 @@ public class HomePageTests extends BaseTest{
     }
 
     @Test
-    public void T025_verifyHTCAddToCompare()
+    public void T015_verifyHTCAddToCompare()
     {
         homePage = new HomePageComponents(driver);
         homePage.clickHTCPhoneAddToCompareBtn();
@@ -253,7 +256,7 @@ public class HomePageTests extends BaseTest{
     }
 
     @Test
-    public void T026_verifyHTCAddToWishlist()
+    public void T016_verifyHTCAddToWishlist()
     {
         homePage = new HomePageComponents(driver);
         int beforeCount = homePage.wishlistCount();
@@ -284,8 +287,8 @@ public class HomePageTests extends BaseTest{
     {
         homePage = new HomePageComponents(driver);
         homePage.clickGiftCardAddToCart();
-        WebElement email = driver.findElement(By.cssSelector(".email-a-friend-button"));
-        Assert.assertTrue(email.isDisplayed());
+        WebElement header = driver.findElement(By.cssSelector("h1"));
+        Assert.assertEquals(header.getText(), "$25 Virtual Gift Card");
     }
 
     @Test
@@ -303,7 +306,157 @@ public class HomePageTests extends BaseTest{
     {
         homePage = new HomePageComponents(driver);
         homePage.clickGiftCardAddToWishList();
-        WebElement email = driver.findElement(By.cssSelector(".email-a-friend-button"));
-        Assert.assertTrue(email.isDisplayed());
+        WebElement header = driver.findElement(By.cssSelector("h1"));
+        Assert.assertEquals(header.getText(), "$25 Virtual Gift Card");
     }
+
+    @Test
+    public void T032_1_verifyNewsTitle() {
+        homePage = new HomePageComponents(driver);
+        Assert.assertTrue(homePage.newsHeaderIsVisible());
+    }
+
+    @Test
+    public void T032_2_verifyNewsItem1Title()
+    {
+        homePage = new HomePageComponents(driver);
+        Assert.assertTrue(homePage.newOnlineStoreIsOpenTitle());
+        homePage.goToNewOnlineStore();
+        WebElement header = driver.findElement(By.cssSelector("h1"));
+        Assert.assertEquals(header.getText(), "New online store is open!");
+    }
+
+    @Test
+    public void T032_3_verifyNewsItem1DetailButton()
+    {
+        homePage = new HomePageComponents(driver);
+        homePage.goToDetailsNewOnlineStore();
+        WebElement header = driver.findElement(By.cssSelector("h1"));
+        Assert.assertEquals(header.getText(), "New online store is open!");
+    }
+
+    @Test
+    public void T032_4_verifyNewsItem2Title()
+    {
+        homePage = new HomePageComponents(driver);
+        Assert.assertTrue(homePage.nopCommerceNewReleaseTitle());
+        homePage.goToNopCommerceNewRelease();
+        WebElement header = driver.findElement(By.cssSelector("h1"));
+        Assert.assertEquals(header.getText(), "nopCommerce new release!");
+    }
+
+    @Test
+    public void T032_5_verifyNewsItem2Detail()
+    {
+        homePage = new HomePageComponents(driver);
+        homePage.goToDetailsNopCommerceNewRelease();
+        WebElement header = driver.findElement(By.cssSelector("h1"));
+        Assert.assertEquals(header.getText(), "nopCommerce new release!");
+    }
+
+    @Test
+    public void T032_6_verifyNewsItem3Title()
+    {
+        homePage = new HomePageComponents(driver);
+        Assert.assertTrue(homePage.aboutNopCommerceTitle());
+        homePage.goToAboutNopCommerce();
+        WebElement header = driver.findElement(By.cssSelector("h1"));
+        Assert.assertEquals(header.getText(), "About nopCommerce");
+    }
+
+    @Test
+    public void T032_7_verifyNewsItem3Details()
+    {
+        homePage = new HomePageComponents(driver);
+        homePage.goToDetailsAboutNopCommerce();
+        WebElement header = driver.findElement(By.cssSelector("h1"));
+        Assert.assertEquals(header.getText(), "About nopCommerce");
+    }
+
+    @Test
+    public void T032_8_verifyNewsArchive()
+    {
+        homePage = new HomePageComponents(driver);
+        homePage.goToNewsArchive();
+        WebElement header = driver.findElement(By.cssSelector("h1"));
+        Assert.assertEquals(header.getText(), "News");
+    }
+
+    @Test
+    public void T033_validateRadioButtons()
+    {
+        homePage = new HomePageComponents(driver);
+
+        //Default Selections
+        Assert.assertFalse(homePage.getExcellentRadio().isSelected());
+        Assert.assertFalse(homePage.getGoodRadio().isSelected());
+        Assert.assertFalse(homePage.getPoorRadio().isSelected());
+        Assert.assertFalse(homePage.getVeryPoorRadio().isSelected());
+
+        //Mutual exclusivity
+        homePage.getExcellentRadio().click();
+        Assert.assertTrue(homePage.getExcellentRadio().isSelected());
+        Assert.assertFalse(homePage.getGoodRadio().isSelected());
+        Assert.assertFalse(homePage.getPoorRadio().isSelected());
+        Assert.assertFalse(homePage.getVeryPoorRadio().isSelected());
+
+        homePage.getGoodRadio().click();
+        Assert.assertTrue(homePage.getGoodRadio().isSelected());
+        Assert.assertFalse(homePage.getExcellentRadio().isSelected());
+        Assert.assertFalse(homePage.getPoorRadio().isSelected());
+        Assert.assertFalse(homePage.getVeryPoorRadio().isSelected());
+
+        homePage.getPoorRadio().click();
+        Assert.assertTrue(homePage.getPoorRadio().isSelected());
+        Assert.assertFalse(homePage.getExcellentRadio().isSelected());
+        Assert.assertFalse(homePage.getGoodRadio().isSelected());
+        Assert.assertFalse(homePage.getVeryPoorRadio().isSelected());
+
+        homePage.getVeryPoorRadio().click();
+        Assert.assertTrue(homePage.getVeryPoorRadio().isSelected());
+        Assert.assertFalse(homePage.getGoodRadio().isSelected());
+        Assert.assertFalse(homePage.getPoorRadio().isSelected());
+        Assert.assertFalse(homePage.getExcellentRadio().isSelected());
+    }
+
+    @Test
+    public void T034_validateVoteErrorMessage()
+    {
+        homePage = new HomePageComponents(driver);
+        homePage.getExcellentRadio().click();
+        homePage.clickVote();
+        WebElement errorMsg = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("block-poll-vote-error-1")));
+        Assert.assertTrue(errorMsg.getText().contains("Only registered users"));
+        wait.until(ExpectedConditions.invisibilityOf(errorMsg));
+    }
+
+    @Test
+    public void T035_validateAlertPopUp()
+    {
+        homePage = new HomePageComponents(driver);
+        homePage.clickVote();
+        Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+        String alertText = alert.getText();
+        Assert.assertEquals(alertText, "Please select an answer", "Alert text mismatch");
+        alert.accept();
+    }
+
+    @Test
+    public void T036_validateOnlyOneRadioSelected()
+    {
+        homePage = new HomePageComponents(driver);
+        List<WebElement> radioButtons = driver.findElements(By.cssSelector("input[type='radio']"));
+        for(int i=0; i < radioButtons.size(); i++)
+        {
+            WebElement currentSelection = radioButtons.get(i);
+            currentSelection.click();
+
+            long selectedCount = radioButtons.stream().filter(WebElement::isSelected).count();
+
+            Assert.assertEquals(selectedCount, 1);
+            Assert.assertTrue(currentSelection.isSelected());
+        }
+    }
+
+
 }

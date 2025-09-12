@@ -3,6 +3,7 @@ package com.nopcommerce.pages;
 import org.jspecify.annotations.Nullable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 public class HomePageComponents {
     WebDriver driver;
@@ -34,6 +35,21 @@ public class HomePageComponents {
     By addToWishlistBtn = By.cssSelector(".add-to-wishlist-button");
     By cartQty = By.cssSelector(".cart-qty");
     By wishlistQty = By.cssSelector(".wishlist-qty");
+
+    By newsHeader = By.cssSelector(".news-list-homepage strong");
+    By newsTitle1 = By.cssSelector(".news-title[href='/new-online-store-is-open']");
+    By detailButton1 = By.cssSelector(".buttons a[href='/new-online-store-is-open']");
+    By newsTitle2 = By.cssSelector(".news-title[href='/nopcommerce-new-release']");
+    By detailButton2 = By.cssSelector(".buttons a[href='/nopcommerce-new-release']");
+    By newsTitle3 = By.cssSelector(".news-title[href='/about-nopcommerce']");
+    By detailButton3 = By.cssSelector(".buttons a[href='/about-nopcommerce']");
+    By newsArchive = By.cssSelector(".view-all");
+
+    By excellentRadioBtn = By.id("pollanswers-1");
+    By goodRadioBtn = By.id("pollanswers-2");
+    By poorRadioBtn = By.id("pollanswers-3");
+    By veryBadRadioBtn = By.id("pollanswers-4");
+    By voteBtn = By.id("vote-poll-1");
 
 
 
@@ -250,6 +266,86 @@ public class HomePageComponents {
     public void clickGiftCardAddToWishList()
     {
         driver.findElement(giftCard).findElement(addToWishlistBtn).click();
+    }
+
+    public boolean newsHeaderIsVisible()
+    {
+        return driver.findElement(newsHeader).isDisplayed();
+    }
+
+    public boolean newOnlineStoreIsOpenTitle()
+    {
+        return driver.findElement(newsTitle1).isDisplayed();
+    }
+
+    public void goToNewOnlineStore()
+    {
+        driver.findElement(newsTitle1).click();
+    }
+
+    public void goToDetailsNewOnlineStore()
+    {
+        driver.findElement(detailButton1).click();
+    }
+
+    public boolean nopCommerceNewReleaseTitle()
+    {
+        return driver.findElement(newsTitle2).isDisplayed();
+    }
+
+    public void goToNopCommerceNewRelease()
+    {
+        driver.findElement(newsTitle2).click();
+    }
+
+    public void goToDetailsNopCommerceNewRelease()
+    {
+        driver.findElement(detailButton2).click();
+    }
+
+    public boolean aboutNopCommerceTitle()
+    {
+        return driver.findElement(newsTitle3).isDisplayed();
+    }
+
+    public void goToAboutNopCommerce()
+    {
+        driver.findElement(newsTitle3).click();
+    }
+
+    public void goToDetailsAboutNopCommerce()
+    {
+        driver.findElement(detailButton3).click();
+    }
+
+    public void goToNewsArchive()
+    {
+        driver.findElement(newsArchive).click();
+    }
+
+    public WebElement getExcellentRadio()
+    {
+        return driver.findElement(excellentRadioBtn);
+    }
+
+    public WebElement getGoodRadio()
+    {
+        return driver.findElement(goodRadioBtn);
+    }
+
+    public WebElement getPoorRadio()
+    {
+        return driver.findElement(poorRadioBtn);
+    }
+
+    public WebElement getVeryPoorRadio()
+    {
+        return driver.findElement(veryBadRadioBtn);
+    }
+
+    public void clickVote()
+    {
+        driver.findElement(voteBtn).click();
     }
 
 }
