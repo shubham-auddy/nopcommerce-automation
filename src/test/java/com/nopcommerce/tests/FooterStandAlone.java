@@ -1,6 +1,7 @@
 package com.nopcommerce.tests;
 
 import java.util.List;
+import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -44,28 +45,69 @@ public class FooterStandAlone extends BaseTest{
 		}
 	}
 	
+	@Test
 	public void verifyFacebookButton() {
-		
+		driver.findElement(By.cssSelector(".facebook")).click();
+		Set<String> windows = driver.getWindowHandles();
+		String parentWindow = driver.getWindowHandle();
+		for(String window: windows) {
+			if(!window.endsWith(parentWindow)) {
+				driver.switchTo().window(window);
+			}
+		}
+		System.out.println(driver.getCurrentUrl());
 	}
 	
+	@Test
 	public void verifyXButton() {
-		
+		driver.findElement(By.cssSelector(".twitter")).click();
+		Set<String> windows = driver.getWindowHandles();
+		String parentWindow = driver.getWindowHandle();
+		for(String window: windows) {
+			if(!window.endsWith(parentWindow)) {
+				driver.switchTo().window(window);
+			}
+		}
+		System.out.println(driver.getCurrentUrl());
 	}
 	
+	@Test
 	public void verifyRSSButton() {
-		
+		driver.findElement(By.cssSelector(".rss")).click();
+		System.out.println(driver.getCurrentUrl());
+		driver.navigate().back();
+		System.out.println(driver.getCurrentUrl());
 	}
 	
+	@Test
 	public void verifyYoutubeButton() {
-		
+		driver.findElement(By.cssSelector(".youtube")).click();
+		Set<String> windows = driver.getWindowHandles();
+		String parentWindow = driver.getWindowHandle();
+		for(String window: windows) {
+			if(!window.endsWith(parentWindow)) {
+				driver.switchTo().window(window);
+			}
+		}
+		System.out.println(driver.getCurrentUrl());
 	}
 	
+	@Test
 	public void verifyInstagramButton() {
-		
+		driver.findElement(By.cssSelector(".instagram")).click();
+		Set<String> windows = driver.getWindowHandles();
+		String parentWindow = driver.getWindowHandle();
+		for(String window: windows) {
+			if(!window.endsWith(parentWindow)) {
+				driver.switchTo().window(window);
+			}
+		}
+		System.out.println(driver.getCurrentUrl());
 	}
 	
+	@Test
 	public void verifyCompanyLink() {
-		
+		driver.findElement(By.cssSelector(".footer-powered-by")).click();
 	}
 	
 	@Test
